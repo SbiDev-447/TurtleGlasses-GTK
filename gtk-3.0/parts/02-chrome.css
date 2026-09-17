@@ -1,0 +1,525 @@
+/* ==========================================================================
+   02-chrome.css - Estructura de chrome.
+   CSD (window.csd, decoration, .solid-csd), headerbar y .titlebar con sus
+   botones de ventana, headerbar entry, menubar, toolbar, actionbar,
+   notebook, stackswitcher y cajas .linked. Bajo niri las apps GTK3 dibujan
+   su propia barra de titulo, asi que los selectores CSD son criticos.
+   ========================================================================== */
+
+/* ----------------------------------------------------------------
+   Ventanas CSD: esquinas redondeadas r4 y sombra solo en decoration
+   (blur pequeno, dentro del limite de rendimiento).
+   ---------------------------------------------------------------- */
+window.csd {
+  border-radius: 12px;
+}
+
+window.csd:backdrop {
+  border-radius: 12px;
+}
+
+window.background.csd {
+  border-radius: 12px;
+}
+
+window.background.csd:backdrop {
+  border-radius: 12px;
+}
+
+.csd {
+  border-radius: 12px;
+}
+
+.csd:backdrop {
+  border-radius: 12px;
+}
+
+decoration {
+  border-radius: 12px;
+}
+
+window.background.csd decoration,
+window.csd > decoration {
+  border-radius: 12px;
+  box-shadow: 0 3px 6px @tk_shadow, 0 0 0 1px @tk_border;
+}
+
+window.background.csd decoration:backdrop,
+window.csd > decoration:backdrop {
+  border-radius: 12px;
+  box-shadow: 0 2px 4px @tk_shadow_soft, 0 0 0 1px @tk_border_backdrop;
+}
+
+/* CSD solido: sin sombra y sin esquinas redondeadas. */
+.solid-csd {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.solid-csd:backdrop {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+window.solid-csd decoration,
+window.solid-csd > decoration {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* ----------------------------------------------------------------
+   Headerbar (barra de titulo cliente).
+   ---------------------------------------------------------------- */
+headerbar {
+  background-color: @tk_chrome;
+  color: @tk_fg;
+  border-bottom: 1px solid @tk_border;
+  min-height: 38px;
+  padding: 0 6px;
+  box-shadow: none;
+}
+
+headerbar:backdrop {
+  background-color: @tk_chrome_backdrop;
+  color: @tk_fg_backdrop;
+  border-bottom-color: @tk_border_backdrop;
+}
+
+headerbar .title {
+  font-weight: bold;
+  color: @tk_fg;
+}
+
+headerbar .title:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+headerbar .subtitle {
+  color: @tk_fg_muted;
+}
+
+headerbar .subtitle:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+headerbar entry {
+  background-color: @tk_ivory;
+  color: @tk_fg;
+  border: 1px solid @tk_border;
+  border-radius: 6px;
+  padding: 4px 8px;
+  min-height: 26px;
+  transition: background-color 120ms ease-out, border-color 120ms ease-out, color 120ms ease-out;
+}
+
+headerbar entry:focus {
+  outline-width: 1px;
+  outline-color: @tk_accent;
+  -gtk-outline-radius: 6px;
+}
+
+headerbar entry:disabled {
+  color: @tk_fg_disabled;
+}
+
+headerbar entry:backdrop {
+  background-color: @tk_bg_backdrop;
+  color: @tk_fg_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+headerbar button {
+  background-color: @tk_button;
+  color: @tk_fg;
+  border: 1px solid @tk_border_soft;
+  border-radius: 6px;
+  padding: 4px 8px;
+  min-height: 26px;
+  transition: background-color 120ms ease-out, border-color 120ms ease-out, color 120ms ease-out;
+}
+
+headerbar button:hover {
+  background-color: @tk_hover;
+  border-color: @tk_border;
+}
+
+headerbar button:active,
+headerbar button:checked {
+  background-color: @tk_active;
+  border-color: @tk_border;
+}
+
+headerbar button:disabled {
+  color: @tk_fg_disabled;
+}
+
+headerbar button:backdrop {
+  background-color: @tk_chrome_backdrop;
+  color: @tk_fg_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+headerbar button:focus {
+  outline-width: 1px;
+  outline-color: @tk_accent;
+  -gtk-outline-radius: 6px;
+}
+
+headerbar > separator,
+headerbar separator {
+  background-color: @tk_border_soft;
+  min-width: 1px;
+  min-height: 24px;
+}
+
+headerbar > separator:backdrop,
+headerbar separator:backdrop {
+  background-color: @tk_border_backdrop;
+}
+
+/* ----------------------------------------------------------------
+   Titulo cliente sin headerbar (.titlebar) y botones de ventana.
+   ---------------------------------------------------------------- */
+.titlebar {
+  background-color: @tk_chrome;
+  color: @tk_fg;
+  border-bottom: 1px solid @tk_border;
+}
+
+.titlebar:backdrop {
+  background-color: @tk_chrome_backdrop;
+  color: @tk_fg_backdrop;
+  border-bottom-color: @tk_border_backdrop;
+}
+
+button.titlebutton {
+  background-color: transparent;
+  color: @tk_fg;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 2px;
+  min-width: 26px;
+  min-height: 26px;
+  transition: background-color 120ms ease-out, border-color 120ms ease-out, color 120ms ease-out;
+}
+
+button.titlebutton:hover {
+  background-color: @tk_hover;
+  border-color: @tk_border_soft;
+}
+
+button.titlebutton:active {
+  background-color: @tk_active;
+  border-color: @tk_border;
+}
+
+button.titlebutton:disabled {
+  color: @tk_fg_disabled;
+}
+
+button.titlebutton:backdrop {
+  background-color: transparent;
+  color: @tk_fg_backdrop;
+}
+
+button.titlebutton:focus {
+  outline-width: 1px;
+  outline-color: @tk_accent;
+  -gtk-outline-radius: 6px;
+}
+
+/* El boton de cerrar resalta en destructivo al pasar el raton. */
+button.titlebutton.close:hover {
+  background-color: @tk_error_fill;
+  color: @tk_on_accent;
+  border-color: @tk_error_fill;
+}
+
+/* ----------------------------------------------------------------
+   Menubar.
+   ---------------------------------------------------------------- */
+menubar {
+  background-color: @tk_chrome;
+  color: @tk_fg;
+  border-bottom: 1px solid @tk_border;
+  padding: 0 2px;
+}
+
+menubar:backdrop {
+  background-color: @tk_chrome_backdrop;
+  color: @tk_fg_backdrop;
+  border-bottom-color: @tk_border_backdrop;
+}
+
+menubar > menuitem {
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+
+menubar > menuitem:hover,
+menubar > menuitem:selected {
+  background-color: @tk_hover;
+  color: @tk_fg;
+}
+
+menubar > menuitem:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+menubar > menuitem:focus {
+  outline-width: 1px;
+  outline-color: @tk_accent;
+  -gtk-outline-radius: 3px;
+}
+
+/* ----------------------------------------------------------------
+   Toolbar (ambas orientaciones) y separadores internos.
+   ---------------------------------------------------------------- */
+toolbar {
+  background-color: @tk_chrome;
+  color: @tk_fg;
+  border: 1px solid @tk_border_soft;
+  padding: 4px;
+}
+
+toolbar.horizontal {
+  border-left: none;
+  border-right: none;
+}
+
+toolbar.vertical {
+  border-top: none;
+  border-bottom: none;
+}
+
+toolbar:backdrop {
+  background-color: @tk_chrome_backdrop;
+  color: @tk_fg_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+toolbar separator {
+  background-color: @tk_border_soft;
+}
+
+toolbar separator.horizontal {
+  min-width: 24px;
+  min-height: 1px;
+}
+
+toolbar separator.vertical {
+  min-width: 1px;
+  min-height: 24px;
+}
+
+toolbar separator:backdrop {
+  background-color: @tk_border_backdrop;
+}
+
+/* ----------------------------------------------------------------
+   Actionbar.
+   GtkActionBar no expone clase de orientacion: el nodo es siempre
+   una barra inferior fija, verificada contra el runtime.
+   ---------------------------------------------------------------- */
+actionbar {
+  background-color: @tk_chrome;
+  color: @tk_fg;
+  border-top: 1px solid @tk_border_soft;
+  padding: 4px 6px;
+}
+
+actionbar:backdrop {
+  background-color: @tk_chrome_backdrop;
+  color: @tk_fg_backdrop;
+  border-top-color: @tk_border_backdrop;
+}
+
+/* ----------------------------------------------------------------
+   Notebook (pestanas).
+   La pestana activa comparte el fondo del area de pagina y deja
+   transparente el borde del lado que conecta con ella.
+   ---------------------------------------------------------------- */
+notebook {
+  background-color: @tk_bg;
+}
+
+notebook:backdrop {
+  background-color: @tk_bg_backdrop;
+}
+
+notebook > header {
+  background-color: @tk_chrome;
+  border-color: @tk_border;
+}
+
+notebook > header.top {
+  border-bottom: 1px solid @tk_border;
+}
+
+notebook > header.bottom {
+  border-top: 1px solid @tk_border;
+}
+
+notebook > header.left {
+  border-right: 1px solid @tk_border;
+}
+
+notebook > header.right {
+  border-left: 1px solid @tk_border;
+}
+
+notebook > header:backdrop {
+  background-color: @tk_chrome_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+notebook tab {
+  background-color: @tk_chrome;
+  color: @tk_fg_muted;
+  border: 1px solid transparent;
+  padding: 4px 12px;
+  transition: background-color 120ms ease-out, border-color 120ms ease-out, color 120ms ease-out;
+}
+
+notebook > header.top tab {
+  border-radius: 6px 6px 0 0;
+}
+
+notebook > header.bottom tab {
+  border-radius: 0 0 6px 6px;
+}
+
+notebook > header.left tab {
+  border-radius: 6px 0 0 6px;
+}
+
+notebook > header.right tab {
+  border-radius: 0 6px 6px 0;
+}
+
+notebook tab:hover {
+  background-color: @tk_hover;
+  color: @tk_fg;
+}
+
+notebook tab:checked {
+  background-color: @tk_bg;
+  color: @tk_fg;
+  border-color: @tk_border;
+}
+
+/* Conexion visual de la pestana activa con el area de pagina. */
+notebook > header.top > tab:checked {
+  border-bottom-color: transparent;
+}
+
+notebook > header.bottom > tab:checked {
+  border-top-color: transparent;
+}
+
+notebook > header.left > tab:checked {
+  border-right-color: transparent;
+}
+
+notebook > header.right > tab:checked {
+  border-left-color: transparent;
+}
+
+notebook tab:backdrop {
+  background-color: @tk_chrome_backdrop;
+  color: @tk_fg_backdrop;
+}
+
+notebook tab:checked:backdrop {
+  background-color: @tk_bg_backdrop;
+  color: @tk_fg_backdrop;
+}
+
+notebook tab:focus {
+  outline-width: 1px;
+  outline-color: @tk_accent;
+  -gtk-outline-radius: 6px;
+}
+
+/* ----------------------------------------------------------------
+   Stackswitcher.
+   GtkStackSwitcher se comporta como una caja .linked (clase confirmada
+   en el runtime); aqui se explicitan sus botones.
+   ---------------------------------------------------------------- */
+stackswitcher > button {
+  border-radius: 0;
+  margin-left: -1px;
+}
+
+stackswitcher > button:first-child {
+  border-radius: 6px 0 0 6px;
+  margin-left: 0;
+}
+
+stackswitcher > button:last-child {
+  border-radius: 0 6px 6px 0;
+}
+
+stackswitcher > button:only-child {
+  border-radius: 6px;
+  margin-left: 0;
+}
+
+stackswitcher > button:focus {
+  outline-width: 1px;
+  outline-color: @tk_accent;
+  -gtk-outline-radius: 6px;
+}
+
+/* ----------------------------------------------------------------
+   Cajas .linked: botones y entries unidos.
+   Radios internos a cero y solape de borde de -1px para que la junta
+   sea exactamente un pixel, no dos.
+   ---------------------------------------------------------------- */
+.linked > button,
+button.linked,
+.linked > entry,
+entry.linked {
+  border-radius: 0;
+  margin-left: -1px;
+}
+
+.linked > button:first-child,
+.linked > entry:first-child {
+  border-radius: 6px 0 0 6px;
+  margin-left: 0;
+}
+
+.linked > button:last-child,
+.linked > entry:last-child {
+  border-radius: 0 6px 6px 0;
+}
+
+.linked > button:only-child,
+.linked > entry:only-child {
+  border-radius: 6px;
+  margin-left: 0;
+}
+
+.linked.vertical > button,
+.linked.vertical > entry {
+  border-radius: 0;
+  margin-top: -1px;
+}
+
+.linked.vertical > button:first-child,
+.linked.vertical > entry:first-child {
+  border-radius: 6px 6px 0 0;
+  margin-top: 0;
+}
+
+.linked.vertical > button:last-child,
+.linked.vertical > entry:last-child {
+  border-radius: 0 0 6px 6px;
+}
+
+.linked.vertical > button:only-child,
+.linked.vertical > entry:only-child {
+  border-radius: 6px;
+  margin-top: 0;
+}

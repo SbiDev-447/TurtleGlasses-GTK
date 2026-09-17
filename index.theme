@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Turtle Glasses GTK
+Comment=Tema claro beige/marmol con texto oscuro, inspirado en Kanagawa Lotus y Gruvbox Light
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=TurtleGlasses-GTK
+MetacityTheme=TurtleGlassesGTK
+IconTheme=Adwaita
+CursorTheme=Adwaita
+ButtonLayout=menu:minimize,maximize,close

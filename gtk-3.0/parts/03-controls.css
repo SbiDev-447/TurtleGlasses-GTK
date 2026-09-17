@@ -1,0 +1,717 @@
+/* ==========================================================================
+   03-controls.css - Controles interactivos.
+   Botones (estados, .flat, sugerido, destructivo), entries (focus,
+   error/warning, barra de progreso de busqueda), spinbutton, combobox,
+   indicadores check / radio, switch, scale, progressbar, levelbar y
+   colorswatch. Selectores de nodos compuestos verificados contra el
+   runtime GTK 3.24.49 con probes de render bajo el propio tema.
+   ========================================================================== */
+
+/* ----------------------------------------------------------------
+   Botones.
+   El boton simple es la superficie firmada del harness: fondo
+   tk_button exacto y borde tk_border de 1px, sin box-shadow ni
+   transparencias en reposo. Los demas estilos derivan de el.
+   ---------------------------------------------------------------- */
+button {
+  background-color: @tk_button;
+  color: @tk_fg;
+  border: 1px solid @tk_border;
+  border-radius: 6px;
+  padding: 4px 8px;
+  min-height: 26px;
+  transition: background-color 120ms ease-out, border-color 120ms ease-out, color 120ms ease-out;
+}
+
+button:hover {
+  background-color: @tk_hover;
+  border-color: @tk_border_strong;
+}
+
+button:active,
+button:checked {
+  background-color: @tk_active;
+  border-color: @tk_border_strong;
+}
+
+button:disabled {
+  color: @tk_fg_disabled;
+}
+
+button:disabled:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+button:backdrop {
+  background-color: @tk_bg_backdrop;
+  color: @tk_fg_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+button:focus {
+  outline-width: 1px;
+  outline-color: @tk_accent;
+  -gtk-outline-radius: 6px;
+}
+
+/* Variantes tipograficas: solo ajustan el relleno interno. */
+button.text-button {
+  padding: 4px 12px;
+}
+
+button.image-button {
+  padding: 4px;
+  min-width: 26px;
+}
+
+/* Boton plano: superficie transparente hasta el hover. */
+button.flat {
+  background-color: transparent;
+  color: @tk_fg;
+  border: 1px solid transparent;
+}
+
+button.flat:hover {
+  background-color: @tk_hover;
+  border-color: @tk_border_soft;
+}
+
+button.flat:active,
+button.flat:checked {
+  background-color: @tk_active;
+  border-color: @tk_border;
+}
+
+button.flat:disabled {
+  background-color: transparent;
+  color: @tk_fg_disabled;
+}
+
+button.flat:disabled:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+button.flat:backdrop {
+  background-color: transparent;
+  color: @tk_fg_backdrop;
+}
+
+/* Accion sugerida: acento navy en reposo. */
+button.suggested-action {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+  border: 1px solid @tk_accent;
+}
+
+button.suggested-action:hover {
+  background-color: @tk_accent_hover;
+  border-color: @tk_accent_hover;
+}
+
+button.suggested-action:active,
+button.suggested-action:checked {
+  background-color: @tk_accent_active;
+  border-color: @tk_accent_active;
+}
+
+button.suggested-action:disabled {
+  background-color: @tk_bg;
+  color: @tk_fg_disabled;
+  border-color: @tk_border_soft;
+}
+
+button.suggested-action:disabled:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+button.suggested-action:backdrop {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+/* Accion destructiva: relleno tk_error_fill con texto claro. */
+button.destructive-action {
+  background-color: @tk_error_fill;
+  color: @tk_on_accent;
+  border: 1px solid @tk_error_fill;
+}
+
+button.destructive-action:hover {
+  background-color: @tk_error_fill;
+  border-color: @tk_error;
+}
+
+button.destructive-action:active,
+button.destructive-action:checked {
+  background-color: @tk_error_fill;
+  border-color: @tk_error;
+}
+
+button.destructive-action:disabled {
+  background-color: @tk_bg;
+  color: @tk_fg_disabled;
+  border-color: @tk_border_soft;
+}
+
+button.destructive-action:disabled:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+button.destructive-action:backdrop {
+  background-color: @tk_error_fill;
+  color: @tk_on_accent;
+}
+
+/* ----------------------------------------------------------------
+   Entries.
+   El focus se marca con el anillo de acento; el nodo selection se
+   mantiene explicito para el area de texto seleccionado y la barra
+   de progreso de busqueda usa el gadget progress (linea inferior).
+   ---------------------------------------------------------------- */
+entry {
+  background-color: @tk_ivory;
+  color: @tk_fg;
+  border: 1px solid @tk_border;
+  border-radius: 6px;
+  padding: 4px 8px;
+  min-height: 26px;
+  transition: background-color 120ms ease-out, border-color 120ms ease-out, color 120ms ease-out;
+}
+
+entry:hover {
+  border-color: @tk_border_strong;
+}
+
+entry:focus {
+  outline-width: 1px;
+  outline-color: @tk_accent;
+  -gtk-outline-radius: 6px;
+}
+
+entry:disabled {
+  color: @tk_fg_disabled;
+  border-color: @tk_border_soft;
+}
+
+entry:disabled:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+entry:backdrop {
+  background-color: @tk_bg_backdrop;
+  color: @tk_fg_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+entry selection {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+/* Progreso de busqueda: linea inferior de acento. */
+entry progress {
+  background-color: @tk_accent;
+  min-height: 2px;
+}
+
+/* Estados semanticos: borde de la capa FORMA. */
+entry.error {
+  border-color: @tk_error;
+}
+
+entry.warning {
+  border-color: @tk_warning;
+}
+
+/* ----------------------------------------------------------------
+   Spinbutton.
+   El nodo spinbutton es el area editable (estilo entry) y sus botones
+   viven dentro del borde con clases up / down verificadas.
+   ---------------------------------------------------------------- */
+spinbutton {
+  background-color: @tk_ivory;
+  color: @tk_fg;
+  border: 1px solid @tk_border;
+  border-radius: 6px;
+  min-height: 26px;
+}
+
+spinbutton:focus {
+  outline-width: 1px;
+  outline-color: @tk_accent;
+  -gtk-outline-radius: 6px;
+}
+
+spinbutton:disabled {
+  color: @tk_fg_disabled;
+}
+
+spinbutton:backdrop {
+  background-color: @tk_bg_backdrop;
+  color: @tk_fg_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+spinbutton button {
+  background-color: transparent;
+  color: @tk_fg;
+  border: none;
+  border-radius: 0;
+  min-width: 24px;
+  min-height: 24px;
+}
+
+spinbutton button:hover {
+  background-color: @tk_hover;
+  color: @tk_fg;
+}
+
+spinbutton button:active {
+  background-color: @tk_active;
+  color: @tk_fg;
+}
+
+spinbutton button:disabled {
+  color: @tk_fg_disabled;
+  background-color: transparent;
+}
+
+spinbutton button:backdrop {
+  color: @tk_fg_backdrop;
+  background-color: transparent;
+}
+
+/* ----------------------------------------------------------------
+   Combobox.
+   La superficie del boton combo se estila aqui; el radio y el solape
+   de cajas .linked los gobierna 02-chrome (especificidad mayor).
+   La flecha hereda el color del boton y se suaviza en reposo.
+   ---------------------------------------------------------------- */
+combobox button.combo {
+  background-color: @tk_button;
+  color: @tk_fg;
+  border: 1px solid @tk_border;
+  border-radius: 6px;
+  padding: 4px 8px;
+  min-height: 26px;
+  transition: background-color 120ms ease-out, border-color 120ms ease-out, color 120ms ease-out;
+}
+
+combobox button.combo:hover {
+  background-color: @tk_hover;
+  border-color: @tk_border_strong;
+}
+
+combobox button.combo:active,
+combobox button.combo:checked {
+  background-color: @tk_active;
+  border-color: @tk_border_strong;
+}
+
+combobox button.combo:disabled {
+  color: @tk_fg_disabled;
+}
+
+combobox button.combo:disabled:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+combobox button.combo:backdrop {
+  background-color: @tk_bg_backdrop;
+  color: @tk_fg_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+combobox button.combo:focus {
+  outline-width: 1px;
+  outline-color: @tk_accent;
+  -gtk-outline-radius: 6px;
+}
+
+combobox arrow {
+  color: @tk_fg_secondary;
+}
+
+combobox button.combo:hover arrow {
+  color: @tk_fg;
+}
+
+combobox button.combo:disabled arrow {
+  color: @tk_fg_disabled;
+}
+
+/* ----------------------------------------------------------------
+   Indicadores check y radio.
+   Los nodos check / radio comparten superficie; el radio es el unico
+   radio de esquina 50% permitido por la escala. El icono checked usa
+   -gtk-icon-source con iconos simbolicos de la lista blanca y el
+   estado indeterminado es un relleno sin icono (no existe icono).
+   ---------------------------------------------------------------- */
+check,
+radio {
+  min-width: 16px;
+  min-height: 16px;
+  background-color: @tk_ivory;
+  border: 1px solid @tk_border;
+  transition: background-color 120ms ease-out, border-color 120ms ease-out, color 120ms ease-out;
+}
+
+check {
+  border-radius: 3px;
+}
+
+radio {
+  border-radius: 50%;
+}
+
+check:hover,
+radio:hover {
+  background-color: @tk_hover;
+  border-color: @tk_border_strong;
+}
+
+check:active,
+radio:active {
+  background-color: @tk_active;
+}
+
+check:checked,
+radio:checked {
+  background-color: @tk_accent;
+  border-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+check:checked {
+  -gtk-icon-source: -gtk-icontheme("object-select-symbolic");
+}
+
+radio:checked {
+  -gtk-icon-source: -gtk-icontheme("radio-checked-symbolic");
+}
+
+check:indeterminate,
+radio:indeterminate {
+  background-color: @tk_active;
+  border-color: @tk_border;
+}
+
+check:disabled,
+radio:disabled {
+  background-color: @tk_panel;
+  border-color: @tk_border_soft;
+}
+
+check:disabled:backdrop,
+radio:disabled:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+check:backdrop,
+radio:backdrop {
+  background-color: @tk_ivory_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+check:checked:backdrop,
+radio:checked:backdrop {
+  background-color: @tk_accent;
+  border-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+check:focus,
+radio:focus {
+  outline-width: 1px;
+  outline-color: @tk_accent;
+  -gtk-outline-radius: 3px;
+}
+
+radio:focus {
+  -gtk-outline-radius: 50%;
+}
+
+/* ----------------------------------------------------------------
+   Switch.
+   Nodo track + gadget slider (gadget custom, pinta fondo). El slider
+   es una pildora 12px sobre un track tambien pildora; el knob activo
+   mantiene marfil para contraste sobre el acento.
+   ---------------------------------------------------------------- */
+switch {
+  background-color: @tk_sunken;
+  border: 1px solid @tk_border;
+  border-radius: 12px;
+  min-width: 46px;
+  min-height: 24px;
+}
+
+switch:hover {
+  border-color: @tk_border_strong;
+}
+
+switch:checked {
+  background-color: @tk_accent;
+  border-color: @tk_accent;
+}
+
+switch:disabled {
+  background-color: @tk_panel;
+  border-color: @tk_border_soft;
+}
+
+switch:disabled:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+switch:backdrop {
+  background-color: @tk_bg_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+switch:checked:backdrop {
+  background-color: @tk_accent;
+  border-color: @tk_accent;
+}
+
+switch slider {
+  background-color: @tk_ivory;
+  border: 1px solid @tk_border;
+  border-radius: 12px;
+  min-width: 18px;
+  min-height: 18px;
+  margin: 2px;
+}
+
+switch slider:hover {
+  background-color: @tk_hover;
+}
+
+switch slider:active {
+  background-color: @tk_active;
+}
+
+switch:checked slider {
+  background-color: @tk_ivory;
+  border-color: @tk_accent;
+}
+
+switch slider:disabled {
+  background-color: @tk_panel;
+  border-color: @tk_border_soft;
+}
+
+switch slider:backdrop {
+  background-color: @tk_ivory_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+switch:checked slider:backdrop {
+  background-color: @tk_ivory_backdrop;
+  border-color: @tk_accent;
+}
+
+switch:focus {
+  outline-width: 1px;
+  outline-color: @tk_accent;
+  -gtk-outline-radius: 12px;
+}
+
+/* ----------------------------------------------------------------
+   Scale.
+   Selectores estandar de nodos compuestos (trough, highlight, slider)
+   verificados por cascada de estilo; el slider es un gadget builtin
+   icon y su pintado depende del trazado del rango. El nodo value es
+   la etiqueta del valor y marks las marcas de graduacion.
+   ---------------------------------------------------------------- */
+scale {
+  min-width: 24px;
+  min-height: 24px;
+}
+
+scale trough {
+  background-color: @tk_sunken;
+  border: 1px solid @tk_border;
+  border-radius: 6px;
+  min-height: 8px;
+}
+
+scale highlight {
+  background-color: @tk_accent;
+  border-radius: 6px;
+}
+
+scale slider {
+  background-color: @tk_button;
+  border: 1px solid @tk_border_strong;
+  border-radius: 12px;
+  min-width: 16px;
+  min-height: 16px;
+}
+
+scale slider:hover {
+  background-color: @tk_hover;
+  border-color: @tk_border_strong;
+}
+
+scale slider:active {
+  background-color: @tk_accent;
+  border-color: @tk_accent;
+}
+
+scale value {
+  color: @tk_fg_secondary;
+}
+
+scale marks {
+  color: @tk_fg_muted;
+}
+
+scale:disabled {
+  color: @tk_fg_disabled;
+}
+
+scale trough:disabled,
+scale highlight:disabled {
+  background-color: @tk_panel;
+}
+
+scale slider:disabled {
+  background-color: @tk_panel;
+  border-color: @tk_border_soft;
+}
+
+scale:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+scale trough:backdrop {
+  background-color: @tk_bg_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+scale highlight:backdrop {
+  background-color: @tk_accent;
+}
+
+scale slider:backdrop {
+  background-color: @tk_bg_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+scale value:backdrop,
+scale marks:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+/* ----------------------------------------------------------------
+   Progressbar.
+   Trough sunken con progress de acento, esquinas r3. La etiqueta de
+   porcentaje es un label hijo (el nodo text no se pinta en runtime).
+   ---------------------------------------------------------------- */
+progressbar {
+  background-color: transparent;
+  color: @tk_fg_secondary;
+}
+
+progressbar label {
+  color: @tk_fg_secondary;
+}
+
+progressbar:disabled {
+  color: @tk_fg_disabled;
+}
+
+progressbar:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+progressbar trough {
+  background-color: @tk_sunken;
+  border: 1px solid @tk_border;
+  border-radius: 3px;
+  padding: 1px;
+}
+
+progressbar trough:backdrop {
+  background-color: @tk_bg_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+progressbar progress {
+  background-color: @tk_accent;
+  border-radius: 3px;
+}
+
+progressbar progress:backdrop {
+  background-color: @tk_accent;
+}
+
+progressbar progress:disabled {
+  background-color: @tk_panel;
+}
+
+/* ----------------------------------------------------------------
+   Levelbar.
+   Bloques rellenos en capa semanticas y vacios en panel. Los offsets
+   low / high / full se declaran aunque el render discreto solo confirme
+   high en offscreen.
+   ---------------------------------------------------------------- */
+levelbar trough {
+  background-color: @tk_sunken;
+  border: 1px solid @tk_border;
+  border-radius: 3px;
+}
+
+levelbar trough:backdrop {
+  background-color: @tk_bg_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+levelbar block {
+  min-width: 8px;
+  min-height: 8px;
+  border-radius: 3px;
+}
+
+levelbar block.filled {
+  background-color: @tk_success;
+}
+
+levelbar block.filled.low {
+  background-color: @tk_gold;
+}
+
+levelbar block.filled.high {
+  background-color: @tk_success;
+}
+
+levelbar block.filled.full {
+  background-color: @tk_success;
+}
+
+levelbar block.empty {
+  background-color: @tk_panel;
+}
+
+levelbar block.empty:backdrop {
+  background-color: @tk_bg_backdrop;
+}
+
+/* ----------------------------------------------------------------
+   Colorswatch.
+   El widget no existe en pygobject para probar render; se estila por
+   nodo documentado (colorswatch + clase activatable). El area de color
+   la pinta el propio widget.
+   ---------------------------------------------------------------- */
+colorswatch {
+  background-color: transparent;
+  border-radius: 6px;
+}
+
+colorswatch.activatable:hover {
+  box-shadow: 0 0 0 1px @tk_border_strong;
+}
+
+colorswatch:backdrop {
+  border-radius: 6px;
+}

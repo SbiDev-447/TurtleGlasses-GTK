@@ -1,0 +1,189 @@
+/* ==========================================================================
+   01-base.css - Base global.
+   Superficies de ventana, tipografia y .dim-label, estados :disabled,
+   seleccion, separadores, frames, .view, enlaces, tooltips y la linea
+   base del anillo de foco (outline sin desplazar el layout).
+   ========================================================================== */
+
+/* Nodo universal: recorte de fondo, propiedades -gtk-* heredadas del tema
+   original y linea base del anillo de foco. Nada mas aqui. */
+* {
+  background-clip: padding-box;
+  -gtktoolbutton-icon-spacing: 4;
+  -gtktextview-error-underline-color: @error_color;
+  -gtkscrolledwindow-scrollbar-spacing: 0;
+  -gtktoolitemgroup-expander-size: 11;
+  -gtkwidget-text-handle-width: 20;
+  -gtkwidget-text-handle-height: 20;
+  outline-style: solid;
+  outline-width: 0;
+  outline-offset: -4px;
+  outline-color: alpha(currentColor, 0.15);
+  -gtk-outline-radius: 3px;
+}
+
+/* Ventana y fondo general (superficie ancla: tk_bg firmado).
+   No se fija font-family: la fuente la controla gtk-font-name del usuario y
+   cualquier familia declarada aqui es inerte. */
+GtkWindow {
+  background-color: @tk_bg;
+  color: @tk_fg;
+}
+
+GtkWindow:backdrop {
+  background-color: @tk_bg_backdrop;
+  color: @tk_fg_backdrop;
+}
+
+.background {
+  background-color: @tk_bg;
+  color: @tk_fg;
+}
+
+.background:backdrop {
+  background-color: @tk_bg_backdrop;
+  color: @tk_fg_backdrop;
+}
+
+/* Ventana sin foco: el texto global se suaviza. */
+:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+/* Tipografia auxiliar. */
+.dim-label {
+  color: @tk_fg_muted;
+}
+
+.dim-label:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+/* Texto deshabilitado. */
+*:disabled {
+  color: @tk_fg_disabled;
+}
+
+/* Seleccion de texto y de filas. */
+selection {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+selection:backdrop {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+*:selected {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+*:selected:backdrop {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+/* Separadores (ambas orientaciones). */
+separator {
+  background-color: @tk_border_soft;
+  min-width: 1px;
+  min-height: 1px;
+}
+
+separator.horizontal {
+  min-width: 24px;
+  min-height: 1px;
+}
+
+separator.vertical {
+  min-width: 1px;
+  min-height: 24px;
+}
+
+separator:backdrop {
+  background-color: @tk_border_backdrop;
+}
+
+/* Marcos y frames. */
+frame > border {
+  border: 1px solid @tk_border;
+  border-radius: 3px;
+}
+
+frame > border:backdrop {
+  border-color: @tk_border_backdrop;
+}
+
+.frame {
+  border: 1px solid @tk_border;
+  border-radius: 3px;
+}
+
+.frame:backdrop {
+  border-color: @tk_border_backdrop;
+}
+
+/* Areas de contenido (.view es la base de listas y areas de texto). */
+.view {
+  background-color: @tk_ivory;
+  color: @tk_fg;
+}
+
+.view:backdrop {
+  background-color: @tk_ivory_backdrop;
+  color: @tk_fg_backdrop;
+}
+
+/* Enlaces. */
+*:link {
+  color: @tk_link;
+}
+
+*:link:hover {
+  color: @tk_link_hover;
+}
+
+*:link:focus {
+  outline-width: 1px;
+  outline-color: @tk_accent;
+  -gtk-outline-radius: 3px;
+}
+
+*:visited {
+  color: @tk_fg_secondary;
+}
+
+*:link:backdrop,
+*:visited:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+/* Tooltips (superficie flotante, radio r3). */
+tooltip,
+.tooltip {
+  background-color: @tk_ivory;
+  color: @tk_fg;
+  border: 1px solid @tk_border;
+  border-radius: 9px;
+  padding: 4px 6px;
+  box-shadow: 0 3px 8px @tk_shadow;
+}
+
+tooltip:backdrop,
+.tooltip:backdrop {
+  background-color: @tk_bg_backdrop;
+  color: @tk_fg_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+tooltip label,
+.tooltip label {
+  color: @tk_fg;
+}
+
+tooltip label:backdrop,
+.tooltip label:backdrop {
+  color: @tk_fg_backdrop;
+}

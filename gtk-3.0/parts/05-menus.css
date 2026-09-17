@@ -1,0 +1,220 @@
+/* ==========================================================================
+   05-menus.css - Menus, popovers y popups.
+   Menu y .menu (superficie marfil r3 con sombra flotante), menuitem con
+   hover de acento, accelerator y flecha de submenu, separadores,
+   popover y su lista interna, modelbutton y menu.button.
+   El popover 3.24.49 no expone nodo arrow (verificado en fuente).
+   ========================================================================== */
+
+/* ----------------------------------------------------------------
+   Menu.
+   Superficie flotante: marfil, radio r3 y sombra suave dentro del
+   limite de rendimiento (blur 8px solo en flotantes).
+   ---------------------------------------------------------------- */
+menu,
+.menu {
+  background-color: @tk_ivory;
+  color: @tk_fg;
+  border: 1px solid @tk_border;
+  border-radius: 9px;
+  padding: 4px;
+  box-shadow: 0 3px 8px @tk_shadow;
+}
+
+menu:backdrop,
+.menu:backdrop {
+  background-color: @tk_bg_backdrop;
+  color: @tk_fg_backdrop;
+  border-color: @tk_border_backdrop;
+  box-shadow: 0 2px 4px @tk_shadow_soft;
+}
+
+/* Popup de combobox / menu.button: misma superficie de menu. */
+menu.button {
+  border-radius: 9px;
+}
+
+/* ----------------------------------------------------------------
+   Menuitem.
+   El hover es la unica superficie con acento solido dentro del menu
+   (texto e iconos en tk_on_accent).
+   ---------------------------------------------------------------- */
+menu menuitem,
+.menu menuitem {
+  padding: 4px 8px;
+  border-radius: 3px;
+  color: @tk_fg;
+}
+
+menu menuitem:hover,
+menu menuitem:selected,
+.menu menuitem:hover,
+.menu menuitem:selected {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+menu menuitem:active,
+.menu menuitem:active {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+menu menuitem:disabled,
+.menu menuitem:disabled {
+  color: @tk_fg_disabled;
+}
+
+menu menuitem:disabled:hover,
+.menu menuitem:disabled:hover {
+  background-color: transparent;
+  color: @tk_fg_disabled;
+}
+
+menu menuitem:backdrop,
+.menu menuitem:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+/* Atajo de teclado alineado a la derecha del menuitem. */
+menu menuitem label.accelerator,
+.menu menuitem label.accelerator {
+  color: @tk_fg_muted;
+}
+
+menu menuitem:hover label.accelerator,
+menu menuitem:selected label.accelerator,
+.menu menuitem:hover label.accelerator,
+.menu menuitem:selected label.accelerator {
+  color: @tk_on_accent;
+}
+
+/* Flecha de submenu (icono symbolic, se tine con color). */
+menu menuitem arrow,
+.menu menuitem arrow {
+  color: @tk_fg_muted;
+}
+
+menu menuitem:hover arrow,
+menu menuitem:selected arrow,
+.menu menuitem:hover arrow,
+.menu menuitem:selected arrow {
+  color: @tk_on_accent;
+}
+
+menu menuitem:disabled arrow,
+.menu menuitem:disabled arrow {
+  color: @tk_fg_disabled;
+}
+
+/* Separadores dentro del menu. */
+menu separator,
+.menu separator {
+  background-color: @tk_border_soft;
+  min-width: 1px;
+  min-height: 1px;
+  margin: 4px 0;
+}
+
+menu separator:backdrop,
+.menu separator:backdrop {
+  background-color: @tk_border_backdrop;
+}
+
+menu menuitem separator,
+.menu menuitem separator {
+  background-color: @tk_border_soft;
+}
+
+/* ----------------------------------------------------------------
+   Popover.
+   Superficie marfil r3 con sombra; la lista interna es transparente
+   para que el fondo del popover sea el de la superficie. Sin nodo
+   arrow en este runtime.
+   ---------------------------------------------------------------- */
+popover,
+popover.background {
+  background-color: @tk_ivory;
+  color: @tk_fg;
+  border: 1px solid @tk_border;
+  border-radius: 9px;
+  padding: 4px;
+  box-shadow: 0 3px 8px @tk_shadow;
+}
+
+popover:backdrop,
+popover.background:backdrop {
+  background-color: @tk_bg_backdrop;
+  color: @tk_fg_backdrop;
+  border-color: @tk_border_backdrop;
+  box-shadow: 0 2px 4px @tk_shadow_soft;
+}
+
+popover.background > list,
+popover > list {
+  background-color: transparent;
+}
+
+popover.background > list row:hover,
+popover > list row:hover {
+  background-color: @tk_hover;
+}
+
+popover.background > list row:selected,
+popover > list row:selected {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+/* Separadores dentro del popover. */
+popover separator,
+popover.background separator {
+  background-color: @tk_border_soft;
+}
+
+/* ----------------------------------------------------------------
+   Modelbutton.
+   Fila de menu moderno (popover de menu) con hover suave; el color de
+   texto hereda del popover.
+   ---------------------------------------------------------------- */
+modelbutton,
+modelbutton.flat {
+  padding: 4px 8px;
+  border-radius: 3px;
+  min-height: 26px;
+  color: @tk_fg;
+}
+
+modelbutton:hover,
+modelbutton.flat:hover {
+  background-color: @tk_hover;
+  color: @tk_fg;
+}
+
+modelbutton:active,
+modelbutton.flat:active {
+  background-color: @tk_active;
+}
+
+modelbutton:disabled,
+modelbutton.flat:disabled {
+  color: @tk_fg_disabled;
+}
+
+modelbutton:disabled:hover,
+modelbutton.flat:disabled:hover {
+  background-color: transparent;
+  color: @tk_fg_disabled;
+}
+
+modelbutton:backdrop,
+modelbutton.flat:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+modelbutton:focus,
+modelbutton.flat:focus {
+  outline-width: 1px;
+  outline-color: @tk_accent;
+  -gtk-outline-radius: 3px;
+}

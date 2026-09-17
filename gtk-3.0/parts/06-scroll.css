@@ -1,0 +1,132 @@
+/* ==========================================================================
+   06-scroll.css - Barras de desplazamiento.
+   Tira transparente en reposo, track sunken al pasar el raton y slider
+   tipo pildora. Incluye la variante overlay-indicator, que flota sobre
+   el contenido y nunca pinta track.
+
+   Nota de plataforma: en GTK 3.24 el nodo trough del scrollbar no pinta
+   su background-color (verificado por pixeles sobre este build: un
+   override opaco solo alcanza 18 px, frente a 708 px al declarar la
+   superficie en el nodo scrollbar). Por eso el track se declara en
+   scrollbar:hover y trough queda transparente de forma explicita.
+   ========================================================================== */
+
+/* Tira de la barra: transparencia total en reposo. */
+scrollbar {
+  background-color: transparent;
+  border: none;
+}
+
+scrollbar.vertical {
+  min-width: 15px;
+}
+
+scrollbar.horizontal {
+  min-height: 15px;
+}
+
+/* ----------------------------------------------------------------
+   Track y slider clasicos.
+   El fondo del track vive en el nodo scrollbar porque es el unico
+   que pinta; el slider es una pildora r6 de 8 px.
+   ---------------------------------------------------------------- */
+scrollbar:hover {
+  background-color: @tk_sunken;
+}
+
+scrollbar trough {
+  background-color: transparent;
+  border: none;
+}
+
+/* Steppers de los extremos.
+   En la barra clasica GTK dibuja dos botones (arriba y abajo) que sin
+   estilo propio heredan la regla generica de button: aparecen como dos
+   cuadrados de 16x34 px con borde, ensanchan la tira y rompen la
+   lectura de pildora. Se anulan por completo para dejar solo
+   trough + slider. */
+scrollbar button {
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+  color: transparent;
+  -gtk-icon-source: none;
+}
+
+scrollbar button:hover,
+scrollbar button:active,
+scrollbar button:disabled {
+  background-color: transparent;
+  border: none;
+  color: transparent;
+  -gtk-icon-source: none;
+}
+
+scrollbar slider {
+  background-color: @tk_border_strong;
+  border: none;
+  border-radius: 6px;
+  min-width: 8px;
+  min-height: 8px;
+}
+
+scrollbar slider:hover {
+  background-color: @tk_border;
+}
+
+scrollbar slider:active {
+  background-color: @tk_accent;
+}
+
+scrollbar slider:disabled {
+  background-color: @tk_border_soft;
+}
+
+/* ----------------------------------------------------------------
+   Overlay-indicator.
+   Variante superpuesta al contenido (gtk-overlay-scrolling verdadero
+   por defecto): tira transparente tambien al pasar el raton y
+   pildora estrecha flotante.
+   ---------------------------------------------------------------- */
+scrollbar.overlay-indicator,
+scrollbar.overlay-indicator:hover {
+  background-color: transparent;
+  border: none;
+}
+
+scrollbar.overlay-indicator slider {
+  background-color: @tk_border_strong;
+  border: none;
+  border-radius: 6px;
+  min-width: 4px;
+  min-height: 4px;
+}
+
+scrollbar.overlay-indicator slider:hover {
+  background-color: @tk_border;
+}
+
+scrollbar.overlay-indicator slider:active {
+  background-color: @tk_accent;
+}
+
+/* ----------------------------------------------------------------
+   Backdrop.
+   El acento de active persiste; el resto va hacia tonos de backdrop.
+   ---------------------------------------------------------------- */
+scrollbar:backdrop {
+  background-color: transparent;
+}
+
+scrollbar:backdrop slider {
+  background-color: @tk_border_backdrop;
+}
+
+scrollbar slider:active:backdrop {
+  background-color: @tk_accent;
+}

@@ -1,0 +1,430 @@
+/* ==========================================================================
+   SbiDev-GTK - Tema GTK3
+   Estetica: proteccion visual, beige / marron / marfil, texto negro
+   Referencias: Kanagawa Lotus, Gruvbox Light
+
+   Como iterar:
+   1. Edita las variables de la seccion PALETA abajo.
+   2. Guarda y reabre las apps GTK3 para ver cambios.
+   3. Para descubrir selectores: GTK_DEBUG=interactive <app>  (Ctrl+Shift+I)
+   ========================================================================== */
+
+/* ------------------------------------------------------------------
+   PALETA - toca SOLO aca para cambiar los colores del tema entero
+   ------------------------------------------------------------------ */
+@define-color theme_bg_color             #f0e9d2; /* beige general (fondo ventanas) */
+@define-color theme_fg_color             #2b2620; /* texto general (negro calido) */
+
+@define-color theme_base_color           #faf8ef; /* marfil/marmol (areas de texto) */
+@define-color theme_text_color           #211d16; /* texto en areas de texto */
+
+@define-color theme_selected_bg_color    #8a7f6a; /* seleccion (marron grisaceo Lotus) */
+@define-color theme_selected_fg_color    #faf8ef; /* texto sobre seleccion */
+
+@define-color borders                    #cfc3a0; /* bordes generales */
+@define-color theme_unfocused_bg_color   #e5dcbd; /* ventana sin foco */
+@define-color theme_unfocused_fg_color   #6b6355;
+@define-color theme_unfocused_base_color #f2eee0;
+@define-color theme_unfocused_text_color #5c5546;
+@define-color unfocused_borders          #d8cfae;
+
+/* Colores semanticos */
+@define-color error_color   #c84053; /* rojo Lotus */
+@define-color warning_color #b57614; /* ambar Gruvbox */
+@define-color success_color #6f894e; /* verde Lotus */
+
+/* Derivados de uso interno */
+@define-color hover_bg     #e9e0c4;
+@define-color active_bg    #ddd2b0;
+@define-color header_bg    #ece4c9;
+@define-color button_bg    #f5f0dd;
+@define-color scrollbar_bg #e0d6b6;
+
+/* ------------------------------------------------------------------
+   BASE
+   ------------------------------------------------------------------ */
+* {
+  background-clip: padding-box;
+  -gtktoolbutton-icon-spacing: 4;
+  -gtktextview-error-underline-color: @error_color;
+  -gtkscrolledwindow-scrollbar-spacing: 0;
+  -gtktoolitemgroup-expander-size: 11;
+  -gtkwidget-text-handle-width: 20;
+  -gtkwidget-text-handle-height: 20;
+}
+
+GtkWindow {
+  background-color: @theme_bg_color;
+  color: @theme_fg_color;
+}
+
+.background {
+  color: @theme_fg_color;
+  background-color: @theme_bg_color;
+}
+
+*:disabled {
+  color: mix(@theme_fg_color, @theme_bg_color, 0.45);
+}
+
+/* Ventana sin foco: se suaviza todo */
+.background:backdrop,
+GtkWindow:backdrop {
+  color: @theme_unfocused_fg_color;
+  background-color: @theme_unfocused_bg_color;
+  border-color: @unfocused_borders;
+}
+
+/* Seleccion de texto */
+selection,
+*:selected {
+  background-color: @theme_selected_bg_color;
+  color: @theme_selected_fg_color;
+}
+
+/* ------------------------------------------------------------------
+   HEADER BAR / BARRA DE TITULO
+   ------------------------------------------------------------------ */
+headerbar {
+  background-color: @header_bg;
+  color: @theme_fg_color;
+  border-bottom: 1px solid @borders;
+  min-height: 38px;
+  padding: 0 6px;
+}
+
+headerbar:backdrop {
+  background-color: @theme_unfocused_bg_color;
+  color: @theme_unfocused_fg_color;
+  border-bottom-color: @unfocused_borders;
+}
+
+.titlebar {
+  background-color: @header_bg;
+  color: @theme_fg_color;
+}
+
+.titlebar:backdrop {
+  background-color: @theme_unfocused_bg_color;
+  color: @theme_unfocused_fg_color;
+}
+
+/* ------------------------------------------------------------------
+   BOTONES
+   ------------------------------------------------------------------ */
+button {
+  background-color: @button_bg;
+  color: @theme_fg_color;
+  border: 1px solid @borders;
+  border-radius: 4px;
+  padding: 4px 10px;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+button:hover {
+  background-color: @hover_bg;
+  border-color: shade(@borders, 0.9);
+}
+
+button:active,
+button:checked {
+  background-color: @active_bg;
+  border-color: shade(@borders, 0.75);
+}
+
+button:disabled {
+  background-color: mix(@button_bg, @theme_bg_color, 0.5);
+  color: mix(@theme_fg_color, @theme_bg_color, 0.5);
+}
+
+button:backdrop {
+  background-color: @theme_unfocused_base_color;
+  color: @theme_unfocused_fg_color;
+  border-color: @unfocused_borders;
+}
+
+/* Boton principal (suggested) en marron */
+button.suggested-action {
+  background-color: #7a5c3e;
+  color: #faf8ef;
+  border-color: #6b5036;
+}
+
+button.suggested-action:hover {
+  background-color: shade(#7a5c3e, 1.12);
+}
+
+button.destructive-action {
+  background-color: @error_color;
+  color: #faf8ef;
+}
+
+/* Botones sin borde (toolbars, headerbars) */
+button.flat {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+button.flat:hover {
+  background-color: @hover_bg;
+}
+
+/* ------------------------------------------------------------------
+   CAMPOS DE TEXTO
+   ------------------------------------------------------------------ */
+entry,
+spinbutton {
+  background-color: @theme_base_color;
+  color: @theme_text_color;
+  border: 1px solid @borders;
+  border-radius: 3px;
+  padding: 4px 6px;
+  box-shadow: none;
+  caret-color: @theme_text_color;
+}
+
+entry:focus {
+  border-color: @theme_selected_bg_color;
+}
+
+entry:disabled {
+  background-color: mix(@theme_base_color, @theme_bg_color, 0.6);
+  color: mix(@theme_text_color, @theme_base_color, 0.5);
+}
+
+entry selection,
+textview selection {
+  background-color: @theme_selected_bg_color;
+  color: @theme_selected_fg_color;
+}
+
+/* ------------------------------------------------------------------
+   MENUS Y BARRAS DE MENU
+   ------------------------------------------------------------------ */
+menubar {
+  background-color: @header_bg;
+  color: @theme_fg_color;
+  border-bottom: 1px solid @borders;
+}
+
+menubar > menuitem {
+  padding: 4px 8px;
+}
+
+menubar > menuitem:hover {
+  background-color: @hover_bg;
+}
+
+menu,
+menu menuitem {
+  background-color: @theme_base_color;
+  color: @theme_fg_color;
+}
+
+menu menuitem {
+  padding: 5px 10px;
+}
+
+menu menuitem:hover {
+  background-color: @theme_selected_bg_color;
+  color: @theme_selected_fg_color;
+}
+
+menu menuitem:disabled {
+  color: mix(@theme_fg_color, @theme_base_color, 0.5);
+}
+
+/* Separadores de menu */
+menu separator,
+menubar separator {
+  background-color: @borders;
+  color: transparent;
+  min-height: 1px;
+}
+
+/* ------------------------------------------------------------------
+   LISTAS, ARBOLES, SIDEBARS (Thunar vive aca)
+   ------------------------------------------------------------------ */
+treeview,
+iconview {
+  background-color: @theme_base_color;
+  color: @theme_text_color;
+}
+
+treeview:selected,
+iconview:selected,
+row:selected {
+  background-color: @theme_selected_bg_color;
+  color: @theme_selected_fg_color;
+}
+
+treeview:hover,
+iconview:hover {
+  background-color: @hover_bg;
+}
+
+/* Sidebar de Thunar/Nautilus */
+.sidebar,
+placessidebar,
+treeview.sidebar {
+  background-color: mix(@theme_bg_color, @theme_base_color, 0.55);
+  color: @theme_fg_color;
+}
+
+.sidebar row:selected,
+placessidebar row:selected {
+  background-color: @theme_selected_bg_color;
+  color: @theme_selected_fg_color;
+}
+
+.sidebar row:hover,
+placessidebar row:hover {
+  background-color: @hover_bg;
+}
+
+/* Nombre de archivo seleccionado en Thunar */
+.view:selected:focus {
+  background-color: @theme_selected_bg_color;
+  color: @theme_selected_fg_color;
+}
+
+/* ------------------------------------------------------------------
+   NOTEBOOK (pestanas)
+   ------------------------------------------------------------------ */
+notebook {
+  background-color: @theme_bg_color;
+  border-color: @borders;
+}
+
+notebook > header {
+  background-color: @header_bg;
+  border-color: @borders;
+}
+
+notebook tab {
+  background-color: transparent;
+  color: @theme_unfocused_fg_color;
+  padding: 4px 12px;
+  border: 1px solid transparent;
+}
+
+notebook tab:checked {
+  background-color: @theme_bg_color;
+  color: @theme_fg_color;
+  border-color: @borders;
+}
+
+notebook tab:hover {
+  background-color: @hover_bg;
+}
+
+/* ------------------------------------------------------------------
+   BARRAS DE DESPLAZAMIENTO
+   ------------------------------------------------------------------ */
+scrollbar {
+  background-color: @scrollbar_bg;
+  border: none;
+}
+
+scrollbar slider {
+  background-color: mix(@theme_fg_color, @scrollbar_bg, 0.65);
+  border-radius: 6px;
+  min-width: 8px;
+  min-height: 8px;
+  margin: 2px;
+}
+
+scrollbar slider:hover {
+  background-color: mix(@theme_fg_color, @scrollbar_bg, 0.5);
+}
+
+scrollbar trough {
+  background-color: transparent;
+}
+
+/* ------------------------------------------------------------------
+   TOOLTIPS
+   ------------------------------------------------------------------ */
+tooltip,
+.tooltip {
+  background-color: #3a332a; /* marron oscuro invertido para contraste */
+  color: #f2ecbc;
+  border: 1px solid #55503f;
+}
+
+tooltip label {
+  color: #f2ecbc;
+}
+
+/* ------------------------------------------------------------------
+   VARIOS
+   ------------------------------------------------------------------ */
+/* Barra de estado */
+statusbar {
+  color: @theme_unfocused_fg_color;
+}
+
+/* Barras de progreso */
+progressbar {
+  background-color: @scrollbar_bg;
+  color: @theme_fg_color;
+}
+
+progressbar trough {
+  background-color: @scrollbar_bg;
+  border-radius: 4px;
+}
+
+progressbar progress {
+  background-color: #7a5c3e; /* marron */
+  border-radius: 4px;
+}
+
+/* Interruptores */
+switch {
+  background-color: @scrollbar_bg;
+  border: 1px solid @borders;
+  border-radius: 12px;
+  min-width: 36px;
+  min-height: 20px;
+}
+
+switch:checked {
+  background-color: #7a5c3e;
+}
+
+switch slider {
+  background-color: @theme_base_color;
+  border: 1px solid @borders;
+  border-radius: 50%;
+  min-width: 16px;
+  min-height: 16px;
+}
+
+/* Checks y radios */
+check,
+radio {
+  background-color: @theme_base_color;
+  color: @theme_fg_color;
+  border: 1px solid @borders;
+}
+
+check:checked,
+radio:checked {
+  background-color: @theme_selected_bg_color;
+  color: @theme_selected_fg_color;
+  border-color: @theme_selected_bg_color;
+}
+
+/* Frame generico */
+frame > border,
+.frame {
+  border: 1px solid @borders;
+  border-radius: 3px;
+}
+
+/* Enlaces */
+*:link {
+  color: @warning_color;
+}

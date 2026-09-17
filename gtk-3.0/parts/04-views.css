@@ -1,0 +1,287 @@
+/* ==========================================================================
+   04-views.css - Vistas y listas.
+   Treeview (cabeceras, filas, expansor), iconview con rubberband de
+   nodo nombrado (selector por elemento, verificado en 3.24.49),
+   list / row, sidebar y placessidebar, expander, paned, .dnd, .trough
+   y el estado :drop(active).
+   ========================================================================== */
+
+/* ----------------------------------------------------------------
+   Treeview.
+   El fondo marfil y la seleccion vienen de 01-base (.view y
+   *:selected); aqui se ajustan colores y areas puntuales del nodo.
+   El expansor se tine con la clase expander puesta por el widget en
+   su propio contexto (forma de clase, no descendiente de elemento).
+   ---------------------------------------------------------------- */
+treeview.view {
+  color: @tk_fg;
+}
+
+treeview.view:hover {
+  color: @tk_fg;
+}
+
+treeview.view:selected {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+treeview.view:selected:focus {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+treeview.view:disabled {
+  color: @tk_fg_disabled;
+}
+
+treeview.view:backdrop {
+  background-color: @tk_ivory_backdrop;
+  color: @tk_fg_backdrop;
+}
+
+treeview.view:selected:backdrop {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+/* Expansion de filas: color del glifo de la flecha. */
+treeview.view.expander {
+  color: @tk_fg_muted;
+}
+
+treeview.view.expander:hover {
+  color: @tk_fg;
+}
+
+treeview.view.expander:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+/* Cabeceras de columnas: nodo header + botones de reordenacion. */
+treeview.view header {
+  background-color: @tk_chrome;
+}
+
+treeview.view header:backdrop {
+  background-color: @tk_chrome_backdrop;
+}
+
+treeview.view header button {
+  background-color: @tk_chrome;
+  color: @tk_fg;
+  border: none;
+  border-radius: 0;
+  padding: 4px 8px;
+  min-height: 26px;
+}
+
+treeview.view header button:hover {
+  background-color: @tk_hover;
+  color: @tk_fg;
+}
+
+treeview.view header button:active {
+  background-color: @tk_active;
+}
+
+treeview.view header button:disabled {
+  color: @tk_fg_disabled;
+}
+
+treeview.view header button:backdrop {
+  background-color: @tk_chrome_backdrop;
+  color: @tk_fg_backdrop;
+}
+
+treeview.view header button:focus {
+  outline-width: 1px;
+  outline-color: @tk_accent;
+  -gtk-outline-radius: 3px;
+}
+
+/* ----------------------------------------------------------------
+   Iconview y rubberband.
+   El rubberband es un nodo nombrado "rubberband" en el runtime, por
+   eso se usa selector de elemento (clase .rubberband no aplica).
+   ---------------------------------------------------------------- */
+iconview {
+  background-color: @tk_ivory;
+  color: @tk_fg;
+}
+
+iconview:backdrop {
+  background-color: @tk_ivory_backdrop;
+  color: @tk_fg_backdrop;
+}
+
+rubberband,
+iconview rubberband {
+  border: 1px solid @tk_accent;
+  background-color: @tk_accent_soft;
+}
+
+/* ----------------------------------------------------------------
+   List y row.
+   Fila hover con tk_hover y seleccion con acento; la seleccion
+   persistente en backdrop sigue el precedente de 01-base.
+   ---------------------------------------------------------------- */
+list {
+  background-color: @tk_ivory;
+  color: @tk_fg;
+}
+
+list:backdrop {
+  background-color: @tk_ivory_backdrop;
+  color: @tk_fg_backdrop;
+}
+
+list row {
+  color: @tk_fg;
+}
+
+list row:hover {
+  background-color: @tk_hover;
+  color: @tk_fg;
+}
+
+list row:selected {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+list row:selected:focus {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+list row:selected:hover {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+list row:disabled {
+  color: @tk_fg_disabled;
+}
+
+list row:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+list row:selected:backdrop {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+/* ----------------------------------------------------------------
+   Sidebar y placessidebar.
+   Panel secundario sobre tk_panel; no existe token de backdrop para
+   panel, asi que el fondo persiste y solo se suaviza el texto.
+   ---------------------------------------------------------------- */
+.sidebar {
+  background-color: @tk_panel;
+  color: @tk_fg;
+}
+
+.sidebar:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+.sidebar row:hover {
+  background-color: @tk_hover;
+  color: @tk_fg;
+}
+
+.sidebar row:selected {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+.sidebar row:selected:hover {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+.sidebar row:selected:backdrop {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+placessidebar,
+placessidebar.sidebar {
+  background-color: @tk_panel;
+  color: @tk_fg;
+}
+
+placessidebar row:selected,
+placessidebar .sidebar row:selected {
+  background-color: @tk_accent;
+  color: @tk_on_accent;
+}
+
+/* ----------------------------------------------------------------
+   Expander de GtkExpander.
+   La flecha se tine con el color del nodo expander (verificado).
+   ---------------------------------------------------------------- */
+expander {
+  color: @tk_fg_secondary;
+}
+
+expander:hover {
+  color: @tk_fg;
+}
+
+expander:disabled {
+  color: @tk_fg_disabled;
+}
+
+expander:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+/* ----------------------------------------------------------------
+   Paned (separador de paneles).
+   El manejador es un nodo separator; hover lo enfatiza.
+   ---------------------------------------------------------------- */
+paned > separator {
+  background-color: @tk_border_soft;
+}
+
+paned > separator:hover {
+  background-color: @tk_border_strong;
+}
+
+paned > separator:backdrop {
+  background-color: @tk_border_backdrop;
+}
+
+/* ----------------------------------------------------------------
+   Objetos de arrastre y zonas de soltar.
+   .dnd es la ventana fantasma de drag; :drop(active) marca la zona.
+   ---------------------------------------------------------------- */
+.dnd {
+  background-color: @tk_ivory;
+  color: @tk_fg;
+  border: 1px solid @tk_border_strong;
+  border-radius: 3px;
+}
+
+.dnd:backdrop {
+  color: @tk_fg_backdrop;
+}
+
+.trough {
+  background-color: @tk_sunken;
+  border: 1px solid @tk_border;
+  border-radius: 3px;
+}
+
+.trough:backdrop {
+  background-color: @tk_bg_backdrop;
+  border-color: @tk_border_backdrop;
+}
+
+*:drop(active) {
+  background-color: @tk_accent_soft;
+  border-color: @tk_accent;
+}

@@ -1,0 +1,13 @@
+/* ==========================================================================
+   TurtleGlasses-GTK para GTK3.
+   Punto de entrada: solo importa los parciales modulares en el orden del
+   mapa de modulos. No se definen reglas aqui.
+   ========================================================================== */
+@import url("parts/00-tokens.css");
+@import url("parts/01-base.css");
+@import url("parts/02-chrome.css");
+@import url("parts/03-controls.css");
+@import url("parts/04-views.css");
+@import url("parts/05-menus.css");
+@import url("parts/06-scroll.css");
+@import url("parts/07-feedback.css");

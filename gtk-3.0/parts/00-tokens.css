@@ -1,0 +1,114 @@
+/* ==========================================================================
+   00-tokens.css - Capa unica de tokens de TurtleGlasses-GTK.
+   Los parciales consumen solo estos simbolos y jamas literales de color:
+   cualquier hex o rgba() vive exclusivamente en este archivo.
+
+   Escala de diseno
+   - Radios: r1 = 3px (controles densos), r2 = 6px (botones, entries),
+     r3 = 9px (popovers, menus, tarjetas), r4 = 12px (CSD / ventanas).
+   - Espaciado: 2 / 4 / 6 / 8 / 12 px. Prohibido padding con decimales.
+   - Grosor de borde: siempre 1px entero (escala 1.0, pixel exacto).
+
+   Regla de la capa semantica
+   - Formas, bordes, rellenos de progreso e indicadores usan la capa FORMA
+     (tk_error, tk_warning, tk_success, tk_info).
+   - Cualquier texto semantico usa la capa TEXTO (tk_*_text). Nunca usar la
+     capa FORMA como color de texto.
+   - Un boton destructivo usa tk_error_fill como fondo con tk_on_accent como
+     texto (contraste 5.40:1).
+   ========================================================================== */
+
+/* Superficies (beige/marfil) */
+@define-color tk_ivory          #faf7ec;  /* areas de texto, marfil */
+@define-color tk_bg             #f0e9d2;  /* FIRMADO: fondo de ventana */
+@define-color tk_chrome         #e9e0c3;  /* headerbar, toolbar, menubar, tabs */
+@define-color tk_panel          #e3d8b8;  /* sidebar, paneles secundarios */
+@define-color tk_sunken         #dcd0aa;  /* troughs, track de scrollbar, insets */
+@define-color tk_button         #f6f2e3;  /* boton en reposo */
+@define-color tk_hover          #e7ddbe;  /* hover */
+@define-color tk_active         #d8cb9e;  /* pressed / checked */
+
+/* Bordes */
+@define-color tk_border         #b8b0a0;  /* borde principal (marca) */
+@define-color tk_border_soft    #cdc6b6;  /* separadores, bordes suaves */
+@define-color tk_border_strong  #a19683;  /* enfasis */
+
+/* Acento navy TurtleGlasses */
+@define-color tk_accent         #2a3d5c;
+@define-color tk_accent_hover   #3a4a6e;
+@define-color tk_accent_active  #1e2e45;
+@define-color tk_on_accent      #f8f6f0;
+@define-color tk_accent_soft    rgba(42, 61, 92, 0.13);
+@define-color tk_accent_veil    rgba(42, 61, 92, 0.27);
+
+/* Texto */
+@define-color tk_fg             #2a2a2a;
+@define-color tk_fg_secondary   #555555;
+@define-color tk_fg_muted       #857e70;
+@define-color tk_fg_disabled    #9a8f7c;
+
+/* Semanticos capa FORMA (rellenos, bordes e indicadores no-texto, >= 3:1) */
+@define-color tk_error          #b85a7a;
+@define-color tk_warning        #a67c1c;
+@define-color tk_success        #5b7a4c;
+@define-color tk_info           #4d8fa8;
+@define-color tk_gold           #b8860b;
+
+/* Semanticos capa TEXTO (AA >= 4.5:1 sobre beige y marfil) */
+@define-color tk_error_text     #813f55;
+@define-color tk_warning_text   #7f6526;
+@define-color tk_success_text   #4d6642;
+@define-color tk_gold_text      #815e08;
+
+/* Rellenos con texto claro encima (>= 4.5:1 con tk_on_accent) */
+@define-color tk_error_fill     #a3465f;
+
+/* Enlaces (AA sobre beige y marfil) */
+@define-color tk_link           #23607d;
+@define-color tk_link_hover     #2a6f8f;
+
+/* Backdrop (ventana sin foco) */
+@define-color tk_bg_backdrop      #eae3d3;
+@define-color tk_ivory_backdrop   #f2eee1;
+@define-color tk_chrome_backdrop  #e4dcc7;
+@define-color tk_fg_backdrop      #6f6a60;
+@define-color tk_border_backdrop  #cdc5b4;
+
+/* Sombras */
+@define-color tk_shadow        rgba(62, 54, 40, 0.26);
+@define-color tk_shadow_soft   rgba(62, 54, 40, 0.13);
+
+/* ------------------------------------------------------------------
+   Alias GTK estandar (obligatorios)
+   Todos son alias a tokens tk_*; jamas se redefinen con hex.
+   ------------------------------------------------------------------ */
+@define-color theme_bg_color                    @tk_bg;
+@define-color theme_fg_color                    @tk_fg;
+@define-color theme_base_color                  @tk_ivory;
+@define-color theme_text_color                  @tk_fg;
+@define-color theme_selected_bg_color           @tk_accent;
+@define-color theme_selected_fg_color           @tk_on_accent;
+@define-color theme_unfocused_bg_color          @tk_bg_backdrop;
+@define-color theme_unfocused_fg_color          @tk_fg_backdrop;
+@define-color theme_unfocused_base_color        @tk_ivory_backdrop;
+@define-color theme_unfocused_text_color        @tk_fg_backdrop;
+@define-color theme_unfocused_selected_bg_color @tk_accent;
+@define-color theme_unfocused_selected_fg_color @tk_on_accent;
+@define-color borders                           @tk_border;
+@define-color unfocused_borders                 @tk_border_backdrop;
+@define-color error_color                       @tk_error;
+@define-color warning_color                     @tk_warning;
+@define-color success_color                     @tk_success;
+@define-color insensitive_bg_color              @tk_sunken;
+@define-color insensitive_fg_color              @tk_fg_disabled;
+@define-color insensitive_base_color            @tk_panel;
+@define-color content_view_bg                   @tk_ivory;
+@define-color text_view_bg                      @tk_ivory;
+@define-color placeholder_text_color            @tk_fg_muted;
+@define-color dim_label                         @tk_fg_muted;
+@define-color wm_bg_a                           @tk_chrome;
+@define-color wm_bg_b                           @tk_chrome;
+@define-color wm_title                          @tk_fg;
+@define-color wm_unfocused_title                @tk_fg_backdrop;
+@define-color wm_border_focused                 @tk_border;
+@define-color wm_border_unfocused               @tk_border_backdrop;
