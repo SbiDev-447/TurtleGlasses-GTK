@@ -14,9 +14,9 @@ Está pensado para la persona que mantenga el tema después de su autor.
   ignoran el tema por diseño.
 - Queda como trabajo futuro, explícitamente fuera del alcance actual:
   - soporte GTK4 y libadwaita,
-  - una variante oscura,
-  - un repositorio git para el tema (hoy el respaldo del original vive en
-    `gtk-3.0/gtk.css.orig`).
+  - una variante oscura.
+- El tema ya vive en un repositorio git; el respaldo local del original v1
+  queda como archivo no versionado (fuera de git por higiene).
 - El direccionamiento del tema se resuelve por el nombre de directorio:
   `TurtleGlasses-GTK`. El archivo `index.theme` declara ese mismo nombre en
   la clave `GtkTheme`.
