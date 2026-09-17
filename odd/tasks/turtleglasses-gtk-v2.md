@@ -1,7 +1,9 @@
 # TurtleGlasses GTK v2 — Rediseño completo del tema GTK3
 
 Estado: en curso
-Rama: n/a (el directorio del tema no es un repo git; respaldo en `gtk-3.0/gtk.css.orig`)
+Repo: git en `main`, origen en `/home/sbi/turtleShell/TurtleGlassesTheme/TurtleGlassesGTK`;
+      expuesto a GTK via symlink `~/.local/share/themes/TurtleGlasses-GTK`;
+      respaldo del original en `gtk-3.0/gtk.css.orig`
 
 ## Objetivo
 
