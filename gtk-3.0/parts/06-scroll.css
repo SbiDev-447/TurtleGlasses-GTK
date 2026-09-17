@@ -91,12 +91,22 @@ scrollbar slider:disabled {
    Overlay-indicator.
    Variante superpuesta al contenido (gtk-overlay-scrolling verdadero
    por defecto): tira transparente tambien al pasar el raton y
-   pildora estrecha flotante.
+   pildora estrecha flotante. La zona reservada se estrecha a 6 px
+   (igual que el respaldo de GTK/Adwaita) para no crear una banda
+   visible en el borde derecho de cada ventana con scroll.
    ---------------------------------------------------------------- */
 scrollbar.overlay-indicator,
 scrollbar.overlay-indicator:hover {
   background-color: transparent;
   border: none;
+}
+
+scrollbar.overlay-indicator.vertical {
+  min-width: 6px;
+}
+
+scrollbar.overlay-indicator.horizontal {
+  min-height: 6px;
 }
 
 scrollbar.overlay-indicator slider {

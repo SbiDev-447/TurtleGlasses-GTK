@@ -305,3 +305,9 @@ Correcciones posteriores al cierre del widget layer:
       intacta según niri (1920x1080 @ 1 en ambos outputs); waybar idéntica
       (24 px, x=1896..1919) con ambos temas — la causa fue el cambio de config
       de waybar del mismo día (commits 14:32 y 15:02 del Dotfiles-SbiDev).
+- [x] Zona del `overlay-indicator` estrechada de 15 px a 6 px: la regla base
+      `scrollbar.vertical { min-width: 15px }` también aplicaba al modo
+      overlay (el predeterminado) y reservaba una banda visible en el borde
+      derecho de cada ventana con scroll; Adwaita/respaldo de GTK usan 6 px.
+      El clásico se mantiene en 15 px (ajuste de densidad previo). 26/26,
+      exit 0.
