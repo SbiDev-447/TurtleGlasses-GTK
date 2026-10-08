@@ -19,9 +19,9 @@
    ========================================================================== */
 
 /* Superficies (beige/marfil) */
-@define-color tk_ivory          #d8cb9e; /* areas de texto, marfil */
+@define-color tk_ivory          #e9e0c3; /* areas de texto, marfil */
 @define-color tk_bg             #f0e9d2; /* FIRMADO: fondo de ventana */
-@define-color tk_chrome         #e9e0c3; /* headerbar, toolbar, menubar, tabs */
+@define-color tk_chrome         #d8cb9e; /* headerbar, toolbar, menubar, tabs */
 @define-color tk_panel          #e3d8b8; /* sidebar, paneles secundarios */
 @define-color tk_sunken         #dcd0aa; /* troughs, track de scrollbar, insets */
 @define-color tk_button         #f6f2e3; /* boton en reposo */
