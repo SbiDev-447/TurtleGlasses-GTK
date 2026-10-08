@@ -11,7 +11,8 @@ la familia de temas **TurtleGlasses**: comparte el acento navy `#2a3d5c` con el
 tema homónimo para VSCode, para que el editor y el escritorio hablen el mismo
 idioma visual.
 
-![examples](./img/example.webp)
+![examples](./img/light-spanish.webp)
+![examples](./img/light-english.webp)
 
 ## El tema
 
