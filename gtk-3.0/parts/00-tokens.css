@@ -19,19 +19,19 @@
    ========================================================================== */
 
 /* Superficies (beige/marfil) */
-@define-color tk_ivory          #faf7ec;  /* areas de texto, marfil */
-@define-color tk_bg             #f0e9d2;  /* FIRMADO: fondo de ventana */
-@define-color tk_chrome         #e9e0c3;  /* headerbar, toolbar, menubar, tabs */
-@define-color tk_panel          #e3d8b8;  /* sidebar, paneles secundarios */
-@define-color tk_sunken         #dcd0aa;  /* troughs, track de scrollbar, insets */
-@define-color tk_button         #f6f2e3;  /* boton en reposo */
-@define-color tk_hover          #e7ddbe;  /* hover */
-@define-color tk_active         #d8cb9e;  /* pressed / checked */
+@define-color tk_ivory          #d8cb9e; /* areas de texto, marfil */
+@define-color tk_bg             #f0e9d2; /* FIRMADO: fondo de ventana */
+@define-color tk_chrome         #e9e0c3; /* headerbar, toolbar, menubar, tabs */
+@define-color tk_panel          #e3d8b8; /* sidebar, paneles secundarios */
+@define-color tk_sunken         #dcd0aa; /* troughs, track de scrollbar, insets */
+@define-color tk_button         #f6f2e3; /* boton en reposo */
+@define-color tk_hover          #e7ddbe; /* hover */
+@define-color tk_active         #d8cb9e; /* pressed / checked */
 
 /* Bordes */
-@define-color tk_border         #b8b0a0;  /* borde principal (marca) */
-@define-color tk_border_soft    #cdc6b6;  /* separadores, bordes suaves */
-@define-color tk_border_strong  #a19683;  /* enfasis */
+@define-color tk_border         #b8b0a0; /* borde principal (marca) */
+@define-color tk_border_soft    #cdc6b6; /* separadores, bordes suaves */
+@define-color tk_border_strong  #a19683; /* enfasis */
 
 /* Acento navy TurtleGlasses */
 @define-color tk_accent         #2a3d5c;
