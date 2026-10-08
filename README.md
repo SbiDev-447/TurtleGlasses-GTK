@@ -51,8 +51,8 @@ rompía la armonía visual. Este rediseño (v2) lo convierte en un sistema:
 | Familia | Token | Valor | Uso |
 |---|---|---|---|
 | Superficies | `tk_bg` | `#f0e9d2` | Fondo de ventana — el ancla firmada del tema |
-| | `tk_ivory` | `#faf7ec` | Áreas de texto (entries, views) |
-| | `tk_chrome` | `#e9e0c3` | Headerbars, toolbars, pestañas |
+| | `tk_ivory` | `#e9e0c3` | Áreas de texto (entries, views) |
+| | `tk_chrome` | `#d8cb9e` | Headerbars, toolbars, pestañas |
 | | `tk_panel` | `#e3d8b8` | Sidebars y paneles secundarios |
 | | `tk_sunken` | `#dcd0aa` | Troughs y superficies hundidas |
 | Acento | `tk_accent` | `#2a3d5c` | Navy TurtleGlasses: selección, foco, acentos |
